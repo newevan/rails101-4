@@ -29,7 +29,7 @@ end
   end
 
   def update
-  
+
 
     if @group.update(group_params)
     redirect_to groups_path, notice: "Update Success"
@@ -53,7 +53,7 @@ def group_params
 end
 
 def find_group_and_check_permission
-  @group = group.find(params[:id])
+  @group = Group.find(params[:id])
 
   if current_user != @group.user
     redirect_to root_path, alert: "You have no peimission"
