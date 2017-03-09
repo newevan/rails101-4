@@ -14,7 +14,8 @@ class GroupsController < ApplicationController
     @group.user = current_user
 
     if @group.save
-    redirect_to groups_path
+      current_user.join!(@group)
+      redirect_to groups_path
     else
       render :new
     end
@@ -30,8 +31,6 @@ class GroupsController < ApplicationController
   end
 
   def update
-
-
     if @group.update(group_params)
     redirect_to groups_path, notice: "Update Success"
     else
@@ -40,7 +39,6 @@ class GroupsController < ApplicationController
   end
 
   def destroy
-
     @group.destroy
     flash[:alert] = "Group deleted"
     redirect_to groups_path
